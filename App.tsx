@@ -26,11 +26,17 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import BackIcon from 'react-native-vector-icons/Feather';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  return <Text style={styles.sectionContainer}>dsada</Text>;
+  return (
+    <Text style={styles.sectionContainer}>
+      dsadaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+      <BackIcon name="chevron-left" size={30} color={'red'} />
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({
