@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <Text style={styles.sectionContainer}>
-      dsadaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+      ds
       <BackIcon name="chevron-left" size={30} color={'red'} />
     </Text>
   );
