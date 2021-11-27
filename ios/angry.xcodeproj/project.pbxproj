@@ -145,7 +145,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-angry-angryTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-angry-angryTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -345,7 +344,7 @@
 		};
 		ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -355,7 +354,7 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-angry/Pods-angry-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-angry/Pods-angry-resources.sh\"\n";
 			showEnvVarsInLog = 0;
