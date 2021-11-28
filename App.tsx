@@ -1,38 +1,81 @@
-// In App.js in a new project
-
+import 'react-native-gesture-handler';
 import * as React from 'react';
-import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import DrawerContent from './src/DrawerContent';
 
-function HomeScreen({navigation}) {
+import {
+  FavouriteStackScreen,
+  HomeStackScreen,
+  SearchStackScreen,
+} from './src/StackNavigation';
+
+const Drawer = createDrawerNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+function mainTab() {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+    <Tab.Navigator
+      initialRouteName="Home"
+      activeColor="#FA4A0C"
+      inactiveColor="#ADADAF"
+      labeled={false}
+      barStyle={{backgroundColor: '#9A9A9D'}}>
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+          tabBarColor: '#9A9A9D',
+        }}
       />
-    </View>
+      <Tab.Screen
+        name="Favourite"
+        component={SearchStackScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <IconFontAwesome name="heart-o" size={25} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={FavouriteStackScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Feather name="user" size={27} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={FavouriteStackScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcons name="history" size={26} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
-function DetailsScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator
+        drawerContent={(props: any) => <DrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={mainTab} />
+        <Drawer.Screen name="Search" component={SearchStackScreen} />
+        {/* <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
+        <Drawer.Screen name="Profile" component={ProfileStackScreen} /> */}
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
