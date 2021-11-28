@@ -1,4 +1,8 @@
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from '@react-navigation/drawer';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
@@ -53,6 +57,7 @@ export default function index(props: any) {
         </View>
       </View>
       <DrawerContentScrollView {...props}>
+        {/* <DrawerItemList {...props} /> */}
         <DrawerItem
           label="Profile"
           labelStyle={styles.labelStyle}
@@ -65,7 +70,9 @@ export default function index(props: any) {
             />
           )}
           inactiveTintColor="#FFF"
-          onPress={() => {}}
+          onPress={() => {
+            props.navigation.navigate('Profile');
+          }}
         />
         <DrawerItem
           labelStyle={styles.labelStyle}

@@ -5,14 +5,12 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import DrawerContent from './src/DrawerContent';
 
-import {
-  FavouriteStackScreen,
-  HomeStackScreen,
-  SearchStackScreen,
-} from './src/StackNavigation';
+import {RootStackScreen} from './src/StackNavigation';
+import {Favourite, History, Home, Profile} from './src/components';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -27,7 +25,7 @@ function mainTab() {
       barStyle={{backgroundColor: '#9A9A9D'}}>
       <Tab.Screen
         name="Home"
-        component={HomeStackScreen}
+        component={Home}
         options={{
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
@@ -37,7 +35,7 @@ function mainTab() {
       />
       <Tab.Screen
         name="Favourite"
-        component={SearchStackScreen}
+        component={Favourite}
         options={{
           tabBarIcon: ({color}) => (
             <IconFontAwesome name="heart-o" size={25} color={color} />
@@ -46,7 +44,7 @@ function mainTab() {
       />
       <Tab.Screen
         name="Profile"
-        component={FavouriteStackScreen}
+        component={Profile}
         options={{
           tabBarIcon: ({color}) => (
             <Feather name="user" size={27} color={color} />
@@ -55,7 +53,7 @@ function mainTab() {
       />
       <Tab.Screen
         name="History"
-        component={FavouriteStackScreen}
+        component={History}
         options={{
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="history" size={26} color={color} />
@@ -69,13 +67,14 @@ function mainTab() {
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator
+      {/* <Drawer.Navigator
         drawerContent={(props: any) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={mainTab} />
-        <Drawer.Screen name="Search" component={SearchStackScreen} />
-        {/* <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
+        <Drawer.Screen name="Home" component={mainTab} /> */}
+      {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
+      <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
         <Drawer.Screen name="Profile" component={ProfileStackScreen} /> */}
-      </Drawer.Navigator>
+      {/* </Drawer.Navigator> */}
+      <RootStackScreen />
     </NavigationContainer>
   );
 }

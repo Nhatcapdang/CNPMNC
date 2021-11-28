@@ -1,10 +1,12 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {FC} from 'react';
+import {StyleProp, View, ViewStyle} from 'react-native';
 
-interface AuxProps {
-  children: React.ReactNode;
+interface CenterProps {
+  style?: ViewStyle;
 }
 
-export default function Center(props: AuxProps) {
-  return <View style={{flex: 1}}>{props.children}</View>;
-}
+const Center: FC<CenterProps> = function ({style, children}) {
+  return <View style={{flex: 1, ...style}}>{children}</View>;
+};
+
+export default Center;
