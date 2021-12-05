@@ -3,8 +3,8 @@ import {
   DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import {
   Avatar,
   Caption,
@@ -16,13 +16,16 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AuthContext } from '../common/context';
 
-export default function index(props: any) {
+export default function DrawerContent(props: any) {
+  const { signOut } = useContext(AuthContext);
+
   return (
-    <View style={{flex: 1, backgroundColor: '#FA4A0C'}}>
+    <View style={{ flex: 1, backgroundColor: '#FA4A0C' }}>
       <View style={styles.drawerContent}>
         <View style={styles.userInfoSection}>
-          <View style={{flexDirection: 'row', marginTop: 15}}>
+          <View style={{ flexDirection: 'row', marginTop: 15 }}>
             <Avatar.Image
               source={{
                 uri: 'https://images.unsplash.com/photo-1488381397757-59d6261610f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=632&q=80',
@@ -34,7 +37,8 @@ export default function index(props: any) {
                 marginLeft: 15,
                 marginTop: -2,
                 flexDirection: 'column',
-              }}>
+              }}
+            >
               <Title style={styles.title}>Nhat Cap Dang</Title>
               <Caption style={styles.caption}>View</Caption>
             </View>
@@ -61,7 +65,7 @@ export default function index(props: any) {
         <DrawerItem
           label="Profile"
           labelStyle={styles.labelStyle}
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <EvilIcons
               name="user"
               color={color}
@@ -77,7 +81,7 @@ export default function index(props: any) {
         <DrawerItem
           labelStyle={styles.labelStyle}
           label="Orders"
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <MaterialCommunityIcons
               name="cart-arrow-down"
               color={color}
@@ -91,7 +95,7 @@ export default function index(props: any) {
         <DrawerItem
           labelStyle={styles.labelStyle}
           label="Offer & promo"
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <AntDesign
               name="tago"
               color={color}
@@ -105,7 +109,7 @@ export default function index(props: any) {
         <DrawerItem
           labelStyle={styles.labelStyle}
           label="Privacy policy"
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <MaterialCommunityIcons
               name="book-search-outline"
               color={color}
@@ -119,7 +123,7 @@ export default function index(props: any) {
         <DrawerItem
           labelStyle={styles.labelStyleLast}
           label="Security"
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <MaterialCommunityIcons
               name="security"
               color={color}
@@ -131,7 +135,7 @@ export default function index(props: any) {
           onPress={() => {}}
         />
       </DrawerContentScrollView>
-      <TouchableRipple onPress={() => {}} rippleColor="#FFF">
+      <TouchableRipple onPress={() => signOut()} rippleColor="#FFF">
         <View style={styles.sectionLogout}>
           <Caption style={styles.caption}>Sign-Out</Caption>
           <AntDesign name="arrowright" color={'#FFF'} size={18} />

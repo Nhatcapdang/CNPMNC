@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Stories from './Stories';
 import Post from './Post';
-import {FlatList, RefreshControl} from 'react-native';
-import {useState} from 'react';
+import { FlatList, RefreshControl } from 'react-native';
+import { useState } from 'react';
 
 const post = [
   {
@@ -35,7 +35,7 @@ const wait = (timeout: any) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
-export default function Home({navigation}: any) {
+export default function Home({ navigation }: any) {
   const [refreshing, setrefreshing] = useState(false);
   const [data, setdata] = useState(post);
 
@@ -48,7 +48,7 @@ export default function Home({navigation}: any) {
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item, idx) => idx.toString()}
       data={data}
-      renderItem={({item}) => <Post post={item} />}
+      renderItem={({ item }) => <Post post={item} />}
       ListHeaderComponent={<Stories />}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

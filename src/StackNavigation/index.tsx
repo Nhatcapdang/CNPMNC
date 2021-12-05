@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   Home,
   Search,
@@ -9,18 +9,19 @@ import {
   SingIn,
   Splash,
 } from '../components';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 // import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Material from 'react-native-vector-icons/MaterialIcons';
-import {SCREEN} from '../const';
+import { SCREEN } from '../const';
 const RootStack = createStackNavigator();
 
 export function RootStackScreen() {
   return (
     <RootStack.Navigator
       // screenOptions={{ header: () => null }}
-      initialRouteName={SCREEN.SCREEN_SPLASH}>
+      initialRouteName={SCREEN.SCREEN_SPLASH}
+    >
       <RootStack.Screen
         name={SCREEN.SCREEN_HOME}
         component={Home}
@@ -45,7 +46,7 @@ export function RootStackScreen() {
             />
           ),
           headerTitle: () => (
-            <Text style={{textAlign: 'center', fontSize: 20}}>
+            <Text style={{ textAlign: 'center', fontSize: 20 }}>
               Nhat Cap Dang
             </Text>
           ),

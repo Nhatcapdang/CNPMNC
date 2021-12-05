@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -47,8 +47,8 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === TAB.HOME) {
             iconName = <MaterialIcons name="home" size={30} color={color} />;
@@ -72,7 +72,8 @@ export default function TabNavigation() {
         allowFontScaling: true,
         //   activeBackgroundColor: "blue",
         //   inactiveBackgroundColor: "green",
-      }}>
+      }}
+    >
       {TAB_SCREEN.map((val, idx) => (
         <Tab.Screen key={idx} name={val.name} component={val.component} />
       ))}
