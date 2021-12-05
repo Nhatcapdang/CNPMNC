@@ -1,21 +1,22 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useEffect, useMemo, useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import DrawerContent from './src/DrawerContent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackScreen } from './src/StackNavigation';
 import { Favourite, History, Home, Profile } from './src/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, View } from 'react-native';
 import { AuthContext } from './src/common/context';
-import { IUsers } from './src/const';
 import { ILoginState } from './src/interface';
+import { IUsers } from './src/const';
+import { ActionKind } from './src/interface/enum';
+import Spinner from './src/common/spinner';
+import { loginReducer } from './src/reducer';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -73,61 +74,26 @@ function mainTab() {
 function App() {
   const initialLoginState: ILoginState = {
     isLoading: true,
-    userName: null,
-    userToken: null,
+    userName: undefined,
+    userToken: undefined,
   };
 
-  const loginReducer = (
-    prevState: any,
-    action: { type: string; token?: string | null; id?: string },
-  ) => {
-    switch (action.type) {
-      case 'RETRIEVE_TOKEN':
-        return {
-          ...prevState,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case 'LOGIN':
-        return {
-          ...prevState,
-          userName: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case 'LOGOUT':
-        return {
-          ...prevState,
-          userName: null,
-          userToken: null,
-          isLoading: false,
-        };
-      case 'REGISTER':
-        return {
-          ...prevState,
-          userName: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-    }
-  };
-
-  const [loginState, dispatch] = React.useReducer(
-    loginReducer,
-    initialLoginState,
-  );
-  const authContext = React.useMemo(
+  const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
+  const authContext = useMemo(
     () => ({
       signIn: async (foundUser: IUsers[]) => {
         const userToken = foundUser[0].userToken;
         const userName = foundUser[0].username;
 
         try {
-          await AsyncStorage.setItem('userToken', userToken);
+          await AsyncStorage.setItem('userToken', userToken as string);
         } catch (e) {
           console.log(e);
         }
-        dispatch({ type: 'LOGIN', id: userName, token: userToken });
+        dispatch({
+          type: ActionKind.LOGIN,
+          payload: { userName, userToken },
+        });
       },
       signOut: async () => {
         try {
@@ -135,13 +101,13 @@ function App() {
         } catch (e) {
           console.log(e);
         }
-        dispatch({ type: 'LOGOUT' });
+        dispatch({ type: ActionKind.LOGOUT });
       },
       signUp: () => {},
     }),
     [],
   );
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(async () => {
       let userToken;
       try {
@@ -149,42 +115,40 @@ function App() {
       } catch (e) {
         console.log(e);
       }
-      dispatch({ type: 'RETRIEVE_TOKEN', token: userToken });
+      dispatch({
+        type: ActionKind.RETRIEVE_TOKEN,
+        payload: { userToken },
+      });
     }, 1000);
   }, []);
-  if (loginState.isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
   return (
-    <AuthContext.Provider value={authContext}>
-      <SafeAreaView
-        style={{ flex: 1 }}
-        edges={['top']}
-        // mode="margin"
-      >
-        <NavigationContainer>
-          {loginState.userToken !== null ? (
-            <Drawer.Navigator
-              drawerContent={(props: any) => <DrawerContent {...props} />}
-              screenOptions={{
-                headerShown: false,
-              }}
-            >
-              <Drawer.Screen name="HomeDrawer" component={mainTab} />
-              {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
+    <Spinner isLoading={loginState.isLoading}>
+      <AuthContext.Provider value={authContext}>
+        <SafeAreaView
+          style={{ flex: 1 }}
+          edges={['top']}
+          // mode="margin"
+        >
+          <NavigationContainer>
+            {loginState.userToken != null ? (
+              <Drawer.Navigator
+                drawerContent={(props: any) => <DrawerContent {...props} />}
+                screenOptions={{
+                  headerShown: false,
+                }}
+              >
+                <Drawer.Screen name="HomeDrawer" component={mainTab} />
+                {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
       <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
         <Drawer.Screen name="Profile" component={ProfileStackScreen} /> */}
-            </Drawer.Navigator>
-          ) : (
-            <RootStackScreen />
-          )}
-        </NavigationContainer>
-      </SafeAreaView>
-    </AuthContext.Provider>
+              </Drawer.Navigator>
+            ) : (
+              <RootStackScreen />
+            )}
+          </NavigationContainer>
+        </SafeAreaView>
+      </AuthContext.Provider>
+    </Spinner>
   );
 }
 
