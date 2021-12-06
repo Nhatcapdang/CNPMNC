@@ -1,6 +1,15 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useMemo, useReducer } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import {
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+} from '@react-navigation/native';
+import {
+  Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme,
+} from 'react-native-paper';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -11,12 +20,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackScreen } from './src/StackNavigation';
 import { Favourite, History, Home, Profile } from './src/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from './src/common/context';
+import { AuthContext, IAuthContext } from './src/common/context';
 import { ILoginState } from './src/interface';
 import { IUsers } from './src/const';
 import { ActionKind } from './src/interface/enum';
 import Spinner from './src/common/spinner';
 import { loginReducer } from './src/reducer';
+import { StatusBar } from 'react-native';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -71,15 +81,38 @@ function mainTab() {
   );
 }
 
+const CustomDefaultTheme = {
+  ...NavigationDefaultTheme,
+  ...PaperDefaultTheme,
+  colors: {
+    ...NavigationDefaultTheme.colors,
+    ...PaperDefaultTheme.colors,
+    background: '#ffffff',
+    text: '#333333',
+  },
+};
+
+const CustomDarkTheme = {
+  ...NavigationDarkTheme,
+  ...PaperDarkTheme,
+  colors: {
+    ...NavigationDarkTheme.colors,
+    ...PaperDarkTheme.colors,
+    background: '#333333',
+    text: '#ffffff',
+  },
+};
 function App() {
   const initialLoginState: ILoginState = {
     isLoading: true,
     userName: undefined,
     userToken: undefined,
   };
+  const [IsDarkTheme, setIsDarkTheme] = useState(false);
+  const theme = IsDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
-  const authContext = useMemo(
+  const authContext = useMemo<IAuthContext>(
     () => ({
       signIn: async (foundUser: IUsers[]) => {
         const userToken = foundUser[0].userToken;
@@ -104,6 +137,9 @@ function App() {
         dispatch({ type: ActionKind.LOGOUT });
       },
       signUp: () => {},
+      toggleTheme: () => {
+        setIsDarkTheme(IsDarkTheme => !IsDarkTheme);
+      },
     }),
     [],
   );
@@ -129,23 +165,26 @@ function App() {
           edges={['top']}
           // mode="margin"
         >
-          <NavigationContainer>
-            {loginState.userToken != null ? (
-              <Drawer.Navigator
-                drawerContent={(props: any) => <DrawerContent {...props} />}
-                screenOptions={{
-                  headerShown: false,
-                }}
-              >
-                <Drawer.Screen name="HomeDrawer" component={mainTab} />
-                {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
+          <StatusBar translucent backgroundColor="transparent" />
+          <PaperProvider theme={theme}>
+            <NavigationContainer theme={theme}>
+              {loginState.userToken != null ? (
+                <Drawer.Navigator
+                  drawerContent={(props: any) => <DrawerContent {...props} />}
+                  screenOptions={{
+                    headerShown: false,
+                  }}
+                >
+                  <Drawer.Screen name="HomeDrawer" component={mainTab} />
+                  {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
       <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
         <Drawer.Screen name="Profile" component={ProfileStackScreen} /> */}
-              </Drawer.Navigator>
-            ) : (
-              <RootStackScreen />
-            )}
-          </NavigationContainer>
+                </Drawer.Navigator>
+              ) : (
+                <RootStackScreen />
+              )}
+            </NavigationContainer>
+          </PaperProvider>
         </SafeAreaView>
       </AuthContext.Provider>
     </Spinner>

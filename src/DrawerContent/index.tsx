@@ -4,7 +4,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import React, { useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Switch, Text, View } from 'react-native';
 import {
   Avatar,
   Caption,
@@ -12,6 +12,7 @@ import {
   Paragraph,
   Title,
   TouchableRipple,
+  useTheme,
 } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -19,7 +20,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { AuthContext } from '../common/context';
 
 export default function DrawerContent(props: any) {
-  const { signOut } = useContext(AuthContext);
+  const paperTheme = useTheme();
+
+  const { signOut, toggleTheme } = useContext(AuthContext);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#FA4A0C' }}>
@@ -134,6 +137,16 @@ export default function DrawerContent(props: any) {
           inactiveTintColor="#FFF"
           onPress={() => {}}
         />
+        <Drawer.Section title="Preferences">
+          <TouchableRipple onPress={() => toggleTheme()}>
+            <View style={styles.preference}>
+              <Text>Dark Theme</Text>
+              <View pointerEvents="none">
+                <Switch value={paperTheme.dark} />
+              </View>
+            </View>
+          </TouchableRipple>
+        </Drawer.Section>
       </DrawerContentScrollView>
       <TouchableRipple onPress={() => signOut()} rippleColor="#FFF">
         <View style={styles.sectionLogout}>
@@ -211,5 +224,11 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     fontWeight: 'bold',
     letterSpacing: 1,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
 });
