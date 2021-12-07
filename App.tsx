@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import {
   NavigationContainer,
@@ -27,6 +26,7 @@ import { ActionKind } from './src/interface/enum';
 import Spinner from './src/common/spinner';
 import { loginReducer } from './src/reducer';
 import { StatusBar } from 'react-native';
+import AuthStack from './src/StackNavigation/AuthStack';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -160,32 +160,33 @@ function App() {
   return (
     <Spinner isLoading={loginState.isLoading}>
       <AuthContext.Provider value={authContext}>
-        <SafeAreaView
+        {/* <SafeAreaView
           style={{ flex: 1 }}
           edges={['top']}
           // mode="margin"
-        >
-          <StatusBar translucent backgroundColor="transparent" />
-          <PaperProvider theme={theme}>
-            <NavigationContainer theme={theme}>
-              {loginState.userToken != null ? (
-                <Drawer.Navigator
-                  drawerContent={(props: any) => <DrawerContent {...props} />}
-                  screenOptions={{
-                    headerShown: false,
-                  }}
-                >
-                  <Drawer.Screen name="HomeDrawer" component={mainTab} />
-                  {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
+        > */}
+        <StatusBar translucent backgroundColor="transparent" />
+        <PaperProvider theme={theme}>
+          <NavigationContainer theme={theme}>
+            {loginState.userToken != null ? (
+              <Drawer.Navigator
+                drawerContent={(props: any) => <DrawerContent {...props} />}
+                screenOptions={{
+                  headerShown: false,
+                }}
+              >
+                <Drawer.Screen name="HomeDrawer" component={mainTab} />
+                {/* <Drawer.Screen name="Search" component={SearchStackScreen} />
       <Drawer.Screen name="Favourite" component={FavouriteStackScreen} />
         <Drawer.Screen name="Profile" component={ProfileStackScreen} /> */}
-                </Drawer.Navigator>
-              ) : (
-                <RootStackScreen />
-              )}
-            </NavigationContainer>
-          </PaperProvider>
-        </SafeAreaView>
+              </Drawer.Navigator>
+            ) : (
+              // <RootStackScreen />
+              <AuthStack />
+            )}
+          </NavigationContainer>
+        </PaperProvider>
+        {/* </SafeAreaView> */}
       </AuthContext.Provider>
     </Spinner>
   );
