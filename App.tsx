@@ -27,6 +27,7 @@ import Spinner from './src/common/spinner';
 import { loginReducer } from './src/reducer';
 import { StatusBar } from 'react-native';
 import AuthStack from './src/StackNavigation/AuthStack';
+import Tabs from './src/TabNavigation/AuthTab';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -182,7 +183,7 @@ function App() {
               </Drawer.Navigator>
             ) : (
               // <RootStackScreen />
-              <AuthStack />
+              <Tabs />
             )}
           </NavigationContainer>
         </PaperProvider>

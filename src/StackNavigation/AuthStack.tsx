@@ -1,5 +1,5 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Image,
   ImageBackground,
@@ -14,8 +14,13 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import { DrawerNavigationState, ParamListBase } from '@react-navigation/native';
+import {
+  DrawerDescriptorMap,
+  DrawerNavigationHelpers,
+} from '@react-navigation/drawer/lib/typescript/src/types';
 
-const OnboardingScreen = () => {
+export const OnboardingScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>OnboardingScreen</Text>
@@ -23,35 +28,39 @@ const OnboardingScreen = () => {
   );
 };
 
-const LoginScreen = () => {
+export const LoginScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Login Screen</Text>
     </View>
   );
 };
-const HomeScreen = () => {
+export const HomeScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>HomeScreen Screen</Text>
     </View>
   );
 };
-const ProfileScreen = () => {
+export const ProfileScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>ProfileScreen Screen</Text>
     </View>
   );
 };
-const SettingScreen = () => {
+export const SettingScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>SettingScreen Screen</Text>
     </View>
   );
 };
-interface IProps {}
+interface IProps {
+  state: DrawerNavigationState<ParamListBase>;
+  navigation: DrawerNavigationHelpers;
+  descriptors: DrawerDescriptorMap;
+}
 
 const CustomDrawer = (props: IProps) => {
   return (
@@ -132,7 +141,7 @@ const CustomDrawer = (props: IProps) => {
     </View>
   );
 };
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const AuthStack = () => {
