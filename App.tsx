@@ -183,7 +183,7 @@ function App() {
               </Drawer.Navigator>
             ) : (
               // <RootStackScreen />
-              <Tabs />
+              <AuthStack />
             )}
           </NavigationContainer>
         </PaperProvider>

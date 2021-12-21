@@ -19,6 +19,8 @@ import {
   DrawerDescriptorMap,
   DrawerNavigationHelpers,
 } from '@react-navigation/drawer/lib/typescript/src/types';
+import Tabs from '../TabNavigation/AuthTab';
+import HomeScreenGame from '../screens/HomeScreenGame';
 
 export const OnboardingScreen = () => {
   return (
@@ -153,6 +155,8 @@ const AuthStack = () => {
         drawerActiveBackgroundColor: '#aa18ea',
         drawerActiveTintColor: '#fff',
         drawerInactiveTintColor: '#333',
+        drawerStatusBarAnimation: 'slide',
+        drawerType: 'front',
         drawerLabelStyle: {
           marginLeft: -25,
           //   fontFamily: 'Roboto-Medium',
@@ -162,7 +166,7 @@ const AuthStack = () => {
     >
       <Drawer.Screen
         name="Login"
-        component={LoginScreen}
+        component={Tabs}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="home-outline" size={22} color={color} />
@@ -170,8 +174,8 @@ const AuthStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
+        name="Game"
+        component={HomeScreenGame}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="person-outline" size={22} color={color} />

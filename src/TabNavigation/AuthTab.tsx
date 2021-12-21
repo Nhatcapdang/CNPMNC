@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 const CustomTabBarButton = ({ children, onPress }: BottomTabBarButtonProps) => (
   <TouchableOpacity
     style={{
-      top: -30,
+      top: -20,
       justifyContent: 'center',
       alignItems: 'center',
       ...styles.shadow,
@@ -54,7 +54,7 @@ const Tabs = () => {
           right: 20,
           //   backgroundColor: 'navy',
           borderRadius: 15,
-          height: 90,
+          height: 75,
           ...styles.shadow,
         },
       }}
