@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -6,20 +6,157 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Image,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfilePicture from '../components/Home/ProfilePicture';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { windowwidth } from '../utils/Dimensions';
+import CustomSwitch from '../components/CustomSwitch';
+import ItemGame from '../components/Item';
+// import {  NativeStackScreenProps } from 'react-navigation-stack';
+const sliderData = [
+  {
+    title: 'First Game',
+    image:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+  },
+  {
+    title: 'Second Game',
+    image:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+  },
+  {
+    title: 'Third Game',
+    image:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+  },
+];
 
-export default function HomeScreenGame({ navigation }) {
+const paidGames = [
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Spider-Man',
+    subtitle: 'Marvel',
+    isFree: 'No',
+    price: '$25.99',
+    id: '1',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Battlefield 2042',
+    subtitle: 'EA',
+    isFree: 'No',
+    price: '$19.99',
+    id: '2',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Spider-Man: Miles Morales',
+    subtitle: 'Marvel',
+    isFree: 'No',
+    price: '$29.99',
+    id: '3',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Halo Infinite',
+    subtitle: 'Xbox Game',
+    isFree: 'No',
+    price: '$24.99',
+    id: '4',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Far Cry 6',
+    subtitle: 'Ubisoft',
+    isFree: 'No',
+    price: '$15.99',
+    id: '5',
+  },
+];
+
+const freeGames = [
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Altos Odyssey',
+    subtitle: 'Noodlecake Studios',
+    isFree: 'Yes',
+    id: '1',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Asphalt 9',
+    subtitle: 'Gameloft',
+    isFree: 'Yes',
+    id: '2',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Genshin Impact',
+    subtitle: 'miHoYo',
+    isFree: 'Yes',
+    id: '3',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Fortnite',
+    subtitle: 'Epic Games',
+    isFree: 'Yes',
+    id: '4',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Pokémon Unite',
+    subtitle: 'The Pokémon Company',
+    isFree: 'Yes',
+    id: '5',
+  },
+  {
+    poster:
+      'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg',
+    title: 'Diablo 4',
+    subtitle: 'Blizzard Entertainment',
+    isFree: 'No',
+    id: '6',
+  },
+];
+
+function BannerSlider({ data }: any) {
   return (
-    // <View>
-    //   <Text>sadsa</Text>
-    //   <ProfilePicture
-    //     uri={
-    //       'https://file.tinnhac.com/resize/600x-/2020/04/03/20200403104047-41cb.jpg'
-    //     }
-    //   />
-    //   </View>
+    <View>
+      <Image
+        source={{
+          uri: data.image,
+        }}
+        style={{ height: 150, width: 300, borderRadius: 10 }}
+      />
+    </View>
+  );
+}
+
+interface IProps {
+  navigation: any;
+}
+const HomeScreenGame = ({ navigation }: IProps) => {
+  const carouselRef = useRef(null);
+  const [index, setIndex] = React.useState(0);
+  const [gamesTab, setGamesTab] = useState(1);
+
+  const onSelectSwitch = (value: number) => {
+    setGamesTab(value);
+  };
+  return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView style={{ padding: 20 }}>
         <View
@@ -27,6 +164,7 @@ export default function HomeScreenGame({ navigation }) {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginBottom: 20,
+            alignItems: 'center',
           }}
         >
           <Text style={{ fontSize: 18 }}>Hello John Doe</Text>
@@ -71,14 +209,77 @@ export default function HomeScreenGame({ navigation }) {
             justifyContent: 'space-between',
           }}
         >
-          <Text style={{ fontSize: 18, fontFamily: 'Roboto-Medium' }}>
-            Upcoming Games
-          </Text>
-          <TouchableOpacity onPress={() => {}}>
+          <Text style={{ fontSize: 18 }}>Upcoming Games</Text>
+          <TouchableOpacity onPress={() => console.log('ok')}>
             <Text style={{ color: '#0aada8' }}>See all</Text>
           </TouchableOpacity>
         </View>
+        <Carousel
+          ref={carouselRef}
+          data={sliderData}
+          renderItem={({ item }) => <BannerSlider data={item} />}
+          sliderWidth={windowwidth - 40}
+          itemWidth={300}
+          loop={true}
+          layout={'default'}
+          //   useScrollView={true}
+          onSnapToItem={index => setIndex(index)}
+        />
+        <Pagination
+          dotsLength={sliderData.length}
+          //   renderDots={(activeIndex: number) => {
+          //     setIndex(activeIndex);
+          //     return null;
+          //   }}
+          activeDotIndex={index}
+          dotStyle={{
+            width: 15,
+            height: 5,
+            borderRadius: 5,
+            marginHorizontal: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.92)',
+          }}
+          inactiveDotOpacity={0.4}
+          inactiveDotScale={0.6}
+          tappableDots={true}
+          animatedTension={1}
+          delayPressInDots={0}
+          //   duration={1400}
+          carouselRef={carouselRef}
+          containerStyle={{ paddingVertical: 10 }}
+        />
+        <View style={{ marginBottom: 20 }}>
+          <CustomSwitch
+            selectionMode={1}
+            option1="Free to play"
+            option2="Paid games"
+            onSelectSwitch={onSelectSwitch}
+          />
+        </View>
+        {gamesTab === 1 &&
+          freeGames.map(item => (
+            <ItemGame
+              key={item.id}
+              photo={item.poster}
+              title={item.title}
+              subTitle={item.subtitle}
+              isFree={item.isFree}
+              price={undefined}
+            />
+          ))}
+        {gamesTab === 2 &&
+          paidGames.map(item => (
+            <ItemGame
+              key={item.id}
+              photo={item.poster}
+              title={item.title}
+              subTitle={item.subtitle}
+              isFree={item.isFree}
+              price={item.price}
+            />
+          ))}
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+export default HomeScreenGame;

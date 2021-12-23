@@ -144,12 +144,20 @@ const CustomDrawer = (props: IProps) => {
   );
 };
 // const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+export type IRootDrawerNavigator = {
+  Login: undefined;
+  Game: undefined;
+  HomeScreen: undefined;
+  ProfileScreen: undefined;
+  SettingScreen: undefined;
+};
+const Drawer = createDrawerNavigator<IRootDrawerNavigator>();
 
 const AuthStack = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
+      initialRouteName="Game"
       screenOptions={{
         headerShown: false,
         drawerActiveBackgroundColor: '#aa18ea',

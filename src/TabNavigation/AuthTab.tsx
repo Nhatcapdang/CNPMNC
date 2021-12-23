@@ -17,7 +17,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const Tab = createBottomTabNavigator();
+type BottomTabParamList = {
+  Home: undefined;
+  Find: undefined;
+  Settings: undefined;
+  Post: undefined;
+  Chat: undefined;
+};
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 const CustomTabBarButton = ({ children, onPress }: BottomTabBarButtonProps) => (
   <TouchableOpacity
     style={{
