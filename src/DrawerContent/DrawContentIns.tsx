@@ -1,8 +1,4 @@
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-} from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React, { useContext } from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import {
@@ -19,7 +15,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthContext } from '../common/context';
 
-export default function DrawerContent(props: any) {
+export default function DrawContentIns(props: any) {
   const paperTheme = useTheme();
 
   const { signOut, toggleTheme } = useContext(AuthContext);

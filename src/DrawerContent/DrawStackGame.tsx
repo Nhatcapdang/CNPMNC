@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Image,
@@ -20,44 +20,14 @@ import {
   DrawerNavigationHelpers,
 } from '@react-navigation/drawer/lib/typescript/src/types';
 import Tabs from '../TabNavigation/AuthTab';
-import HomeScreenGame from '../screens/HomeScreenGame';
+import {
+  HomeScreenGame,
+  FavouriteScreen,
+  HistoryScreen,
+  ProfileScreen,
+} from '../screens';
+import { AuthContext } from '../common/context';
 
-export const OnboardingScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>OnboardingScreen</Text>
-    </View>
-  );
-};
-
-export const LoginScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Login Screen</Text>
-    </View>
-  );
-};
-export const HomeScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>HomeScreen Screen</Text>
-    </View>
-  );
-};
-export const ProfileScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>ProfileScreen Screen</Text>
-    </View>
-  );
-};
-export const SettingScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>SettingScreen Screen</Text>
-    </View>
-  );
-};
 interface IProps {
   state: DrawerNavigationState<ParamListBase>;
   navigation: DrawerNavigationHelpers;
@@ -65,6 +35,7 @@ interface IProps {
 }
 
 const CustomDrawer = (props: IProps) => {
+  const { uiTheme } = useContext(AuthContext);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
@@ -125,7 +96,12 @@ const CustomDrawer = (props: IProps) => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={{ paddingVertical: 15 }}>
+        <TouchableOpacity
+          onPress={() => {
+            uiTheme();
+          }}
+          style={{ paddingVertical: 15 }}
+        >
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Ionicons name="exit-outline" size={22} />
             <Text
@@ -147,13 +123,13 @@ const CustomDrawer = (props: IProps) => {
 export type IRootDrawerNavigator = {
   Login: undefined;
   Game: undefined;
-  HomeScreen: undefined;
+  History: undefined;
   ProfileScreen: undefined;
-  SettingScreen: undefined;
+  Favourite: undefined;
 };
 const Drawer = createDrawerNavigator<IRootDrawerNavigator>();
 
-const AuthStack = () => {
+const DrawStackGame = () => {
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
@@ -173,7 +149,7 @@ const AuthStack = () => {
       }}
     >
       <Drawer.Screen
-        name="Login"
+        name="Login1"
         component={Tabs}
         options={{
           drawerIcon: ({ color }) => (
@@ -182,7 +158,7 @@ const AuthStack = () => {
         }}
       />
       <Drawer.Screen
-        name="Game"
+        name="Game1"
         component={HomeScreenGame}
         options={{
           drawerIcon: ({ color }) => (
@@ -191,8 +167,8 @@ const AuthStack = () => {
         }}
       />
       <Drawer.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="History1"
+        component={HistoryScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
@@ -200,7 +176,7 @@ const AuthStack = () => {
         }}
       />
       <Drawer.Screen
-        name="ProfileScreen"
+        name="ProfileScreen1"
         component={ProfileScreen}
         options={{
           drawerIcon: ({ color }) => (
@@ -209,8 +185,8 @@ const AuthStack = () => {
         }}
       />
       <Drawer.Screen
-        name="SettingScreen"
-        component={SettingScreen}
+        name="Favourite1"
+        component={FavouriteScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="settings-outline" size={22} color={color} />
@@ -221,4 +197,4 @@ const AuthStack = () => {
   );
 };
 
-export default AuthStack;
+export default DrawStackGame;

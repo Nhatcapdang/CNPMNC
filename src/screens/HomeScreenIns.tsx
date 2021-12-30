@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Stories from './Stories';
-import Post from './Post';
 import { FlatList, RefreshControl } from 'react-native';
 import { useState } from 'react';
+import Post from '../components/Home/Post';
+import Stories from '../components/Home/Stories';
 
 const post = [
   {
@@ -35,7 +35,7 @@ const wait = (timeout: any) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
-export default function Home({ navigation }: any) {
+export default function HomeScreenIns({ navigation }: any) {
   const [refreshing, setrefreshing] = useState(false);
   const [data, setdata] = useState(post);
 

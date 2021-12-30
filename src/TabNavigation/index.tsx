@@ -4,14 +4,12 @@ import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-
 import {
-  HomeStackScreen,
-  SearchStackScreen,
-  FavouriteStackScreen,
-  ProfileStackScreen,
-} from '../StackNavigation';
-
+  FavouriteScreen,
+  HistoryScreen,
+  HomeScreenIns,
+  ProfileScreen,
+} from '../screens';
 const TAB = {
   HOME: 'TabHome',
   FAVOURITE: 'TabFavourite',
@@ -22,22 +20,22 @@ const TAB = {
 const TAB_SCREEN = [
   {
     name: TAB.HOME,
-    component: HomeStackScreen,
+    component: HomeScreenIns,
     // iconName: <MaterialIcons name="home" size={30} />,
   },
   {
     name: TAB.FAVOURITE,
-    component: FavouriteStackScreen,
+    component: FavouriteScreen,
     // iconName: <IconFontAwesome name="heart-o" size={25} />,
   },
   {
     name: TAB.PROFILE,
-    component: ProfileStackScreen,
+    component: ProfileScreen,
     // iconName: <EvilIcons name="user" size={30} />,
   },
   {
     name: TAB.HISTORY,
-    component: SearchStackScreen,
+    component: HistoryScreen,
     // iconName: <Ionicons name="search-sharp" size={30} />,
   },
 ];

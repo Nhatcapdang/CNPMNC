@@ -1,19 +1,12 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  Home,
-  Search,
-  Favourite,
-  Profile,
-  SingUp,
-  SingIn,
-  Splash,
-} from '../components';
+import { Search, SingUp, SingIn, Splash } from '../components';
 import { Text } from 'react-native';
 // import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Material from 'react-native-vector-icons/MaterialIcons';
 import { SCREEN } from '../const';
+import { FavouriteScreen, HomeScreenIns, ProfileScreen } from '../screens';
 const RootStack = createStackNavigator();
 
 export function RootStackScreen() {
@@ -24,7 +17,7 @@ export function RootStackScreen() {
     >
       <RootStack.Screen
         name={SCREEN.SCREEN_HOME}
-        component={Home}
+        component={HomeScreenIns}
         options={{
           // title: 'Nhat Cap Dang',
           headerLeftContainerStyle: {
@@ -62,8 +55,14 @@ export function RootStackScreen() {
       />
 
       <RootStack.Screen name={SCREEN.SCREEN_SEARCH} component={Search} />
-      <RootStack.Screen name={SCREEN.SCREEN_FAVOURITE} component={Favourite} />
-      <RootStack.Screen name={SCREEN.SCREEN_PROFILE} component={Profile} />
+      <RootStack.Screen
+        name={SCREEN.SCREEN_FAVOURITE}
+        component={FavouriteScreen}
+      />
+      <RootStack.Screen
+        name={SCREEN.SCREEN_PROFILE}
+        component={ProfileScreen}
+      />
       <RootStack.Screen name={SCREEN.SCREEN_SIGN_UP} component={SingUp} />
       <RootStack.Screen
         name={SCREEN.SCREEN_SIGN_IN}

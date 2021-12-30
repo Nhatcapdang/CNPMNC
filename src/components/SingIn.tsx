@@ -10,17 +10,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Center from '../../common/center';
+import Center from '../common/center';
 import {
   COLOR_GRAY,
   COLOR_WHITE,
   COLOR_ORANGE_DARK,
   COLOR_ORANGE,
   COLOR_BLACK,
-} from '../../VariableCss';
+} from '../VariableCss';
 import { TextInput, Button } from 'react-native-paper';
-import { SCREEN, Users } from '../../const';
-import { AuthContext } from '../../common/context';
+import { SCREEN, Users } from '../const';
+import { AuthContext } from '../common/context';
 import Feather from 'react-native-vector-icons/Feather';
 
 // import Logo from '../../../assets/hat.png'
@@ -112,7 +112,7 @@ const SignInScreen: FC<SignInProps> = ({ navigation }) => {
           //   source={{
           //     uri: 'https://images.unsplash.com/photo-1628778637004-8b346181ba8c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=657&q=80',
           //   }}
-          source={require('../../../assets/hat.png')}
+          source={require('../../assets/hat.png')}
         />
         <View style={styles.header_footer}>
           <Button

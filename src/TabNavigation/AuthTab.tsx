@@ -3,20 +3,18 @@ import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {
-  HomeScreen,
-  LoginScreen,
-  OnboardingScreen,
-  ProfileScreen,
-  SettingScreen,
-} from '../StackNavigation/AuthStack';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import {
+  FavouriteScreen,
+  HistoryScreen,
+  HomeScreenIns,
+  ProfileScreen,
+} from '../screens';
 type BottomTabParamList = {
   Home: undefined;
   Find: undefined;
@@ -68,7 +66,7 @@ const Tabs = () => {
     >
       <Tab.Screen
         name="Home"
-        component={OnboardingScreen}
+        component={HomeScreenIns}
         options={{
           tabBarIcon: ({ color }) => (
             <View
@@ -95,7 +93,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Find"
-        component={LoginScreen}
+        component={FavouriteScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <View
@@ -122,7 +120,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Post"
-        component={HomeScreen}
+        component={HistoryScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome
@@ -168,7 +166,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Chat"
-        component={SettingScreen}
+        component={HistoryScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <View
