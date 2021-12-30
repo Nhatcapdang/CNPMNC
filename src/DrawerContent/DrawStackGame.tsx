@@ -149,7 +149,7 @@ const DrawStackGame = () => {
       }}
     >
       <Drawer.Screen
-        name="Login1"
+        name="Login"
         component={Tabs}
         options={{
           drawerIcon: ({ color }) => (
@@ -158,7 +158,7 @@ const DrawStackGame = () => {
         }}
       />
       <Drawer.Screen
-        name="Game1"
+        name="Game"
         component={HomeScreenGame}
         options={{
           drawerIcon: ({ color }) => (
@@ -167,7 +167,7 @@ const DrawStackGame = () => {
         }}
       />
       <Drawer.Screen
-        name="History1"
+        name="History"
         component={HistoryScreen}
         options={{
           drawerIcon: ({ color }) => (
@@ -176,7 +176,7 @@ const DrawStackGame = () => {
         }}
       />
       <Drawer.Screen
-        name="ProfileScreen1"
+        name="ProfileScreen"
         component={ProfileScreen}
         options={{
           drawerIcon: ({ color }) => (
@@ -185,7 +185,7 @@ const DrawStackGame = () => {
         }}
       />
       <Drawer.Screen
-        name="Favourite1"
+        name="Favourite"
         component={FavouriteScreen}
         options={{
           drawerIcon: ({ color }) => (

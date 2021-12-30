@@ -7,15 +7,15 @@ export const TAB = {
   HISTORY: 'TabHistory',
 };
 
-export const SCREEN = {
-  SCREEN_HOME: 'Home',
-  SCREEN_FAVOURITE: 'Favourite',
-  SCREEN_PROFILE: 'Profile',
-  SCREEN_SEARCH: 'Search',
-  SCREEN_SIGN_UP: 'SingUp',
-  SCREEN_SIGN_IN: 'SingIn',
-  SCREEN_SPLASH: 'Splash',
-};
+export enum SCREEN {
+  SCREEN_HOME = 'Home1',
+  SCREEN_FAVOURITE = 'Favourite1',
+  SCREEN_PROFILE = 'Profile1',
+  SCREEN_SEARCH = 'Search1',
+  SCREEN_SIGN_UP = 'SingUp',
+  SCREEN_SIGN_IN = 'SingIn',
+  SCREEN_SPLASH = 'Splash',
+}
 
 export const Users: IUsers[] = [
   {

@@ -1,5 +1,4 @@
 import React from 'react';
-import DrawContentIns from './DrawStackGame';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,6 +10,7 @@ import {
   HomeScreenIns,
   ProfileScreen,
 } from '../screens';
+import DrawContentIns from './\bDrawContentIns';
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -18,7 +18,7 @@ const Tab = createMaterialBottomTabNavigator();
 function mainTab() {
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreenIns"
+      initialRouteName="something"
       activeColor="#FA4A0C"
       inactiveColor="#ADADAF"
       labeled={false}
@@ -53,8 +53,8 @@ function mainTab() {
         }}
       />
       <Tab.Screen
-        name="History"
-        component={HistoryScreen}
+        name="something"
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="history" size={26} color={color} />
