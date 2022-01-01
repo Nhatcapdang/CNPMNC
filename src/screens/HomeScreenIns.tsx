@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import Post from '../components/Home/Post';
 import Stories from '../components/Home/Stories';
@@ -37,22 +37,22 @@ const wait = (timeout: any) => {
 
 export default function HomeScreenIns({ navigation }: any) {
   const [refreshing, setrefreshing] = useState(false);
-  const [data, setdata] = useState(post);
-
   const onRefresh = React.useCallback(() => {
     setrefreshing(true);
     wait(2000).then(() => setrefreshing(false));
   }, []);
   return (
-    <FlatList
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={(item, idx) => idx.toString()}
-      data={data}
-      renderItem={({ item }) => <Post post={item} />}
-      ListHeaderComponent={<Stories />}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    />
+    <SafeAreaView>
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item, idx) => idx.toString()}
+        data={post}
+        renderItem={({ item }) => <Post post={item} />}
+        ListHeaderComponent={<Stories />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
+    </SafeAreaView>
   );
 }

@@ -42,6 +42,7 @@ const HomeScreenGame = ({ navigation }: IProps) => {
   const onSelectSwitch = (value: GameType) => {
     setGamesTab(value);
   };
+  console.log('carouselRef', carouselRef);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView style={{ padding: 20 }}>

@@ -19,9 +19,10 @@ import {
   COLOR_BLACK,
 } from '../VariableCss';
 import { TextInput, Button } from 'react-native-paper';
-import { SCREEN, Users } from '../const';
+import { Users } from '../const';
 import { AuthContext } from '../common/context';
 import Feather from 'react-native-vector-icons/Feather';
+import { SCREEN } from '../interface/enum';
 
 // import Logo from '../../../assets/hat.png'
 interface SignInProps {

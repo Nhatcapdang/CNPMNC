@@ -9,10 +9,10 @@ import { ActionKind } from './src/interface/enum';
 import Spinner from './src/common/spinner';
 import { loginReducer, initialLoginState } from './src/reducer';
 import { StatusBar } from 'react-native';
-import DrawStackGame from './src/DrawerContent/DrawStackGame';
+import DrawStackGame from './src/DrawerNavigator/DrawStackGame';
 import Tabs from './src/TabNavigation/AuthTab';
 import { DarkTheme } from './src/common/Theme';
-import DrawStackIns from './src/DrawerContent/DrawStackIns';
+import DrawStackIns from './src/DrawerNavigator/DrawStackIns';
 
 function App() {
   const [IsDarkTheme, setIsDarkTheme] = useState(false);

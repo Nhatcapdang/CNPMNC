@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Search, SingUp, SingIn, Splash } from '../components';
+import { SingUp, SingIn, Splash } from '../components';
 import { Text } from 'react-native';
 // import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Material from 'react-native-vector-icons/MaterialIcons';
 import { SCREEN } from '../interface/enum';
-import { FavouriteScreen, HomeScreenIns, ProfileScreen } from '../screens';
+import { HomeScreenIns } from '../screens';
 const RootStack = createStackNavigator();
 
 export function RootStackScreen() {
   return (
     <RootStack.Navigator
-      // screenOptions={{ header: () => null }}
+      screenOptions={{ headerShown: false }}
       initialRouteName={SCREEN.SCREEN_SPLASH}
     >
       <RootStack.Screen
@@ -54,7 +54,7 @@ export function RootStackScreen() {
         }}
       />
 
-      <RootStack.Screen name={SCREEN.SCREEN_SEARCH} component={Search} />
+      {/* <RootStack.Screen name={SCREEN.SCREEN_SEARCH} component={Search} />
       <RootStack.Screen
         name={SCREEN.SCREEN_FAVOURITE}
         component={FavouriteScreen}
@@ -62,20 +62,14 @@ export function RootStackScreen() {
       <RootStack.Screen
         name={SCREEN.SCREEN_PROFILE}
         component={ProfileScreen}
-      />
+      /> */}
       <RootStack.Screen name={SCREEN.SCREEN_SIGN_UP} component={SingUp} />
-      <RootStack.Screen
-        name={SCREEN.SCREEN_SIGN_IN}
-        options={{
-          headerShown: false,
-        }}
-        component={SingIn}
-      />
+      <RootStack.Screen name={SCREEN.SCREEN_SIGN_IN} component={SingIn} />
       <RootStack.Screen
         name={SCREEN.SCREEN_SPLASH}
-        options={{
-          headerShown: false,
-        }}
+        // options={{
+        //   headerShown: false,
+        // }}
         component={Splash}
       />
     </RootStack.Navigator>

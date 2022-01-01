@@ -17,9 +17,9 @@ import {
   COLOR_WHITE,
   COLOR_ORANGE_DARK,
 } from '../VariableCss';
-import { SCREEN } from '../const';
 import { height } from '../utils/Dimensions';
 import { AuthContext } from '../common/context';
+import { SCREEN } from '../interface/enum';
 
 interface SplashProps {
   navigation?: any;
