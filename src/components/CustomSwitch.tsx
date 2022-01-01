@@ -1,11 +1,12 @@
+import { GameType } from '../interface/enum';
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 type Iprops = {
-  selectionMode: number;
+  selectionMode: GameType;
   option1: string;
   option2: string;
-  onSelectSwitch: (value: number) => void;
+  onSelectSwitch: (value: GameType) => void;
 };
 export default function CustomSwitch({
   selectionMode,
@@ -15,7 +16,7 @@ export default function CustomSwitch({
 }: Iprops) {
   const [getSelectionMode, setSelectionMode] = useState(selectionMode);
 
-  const updateSwitchData = (value: number) => {
+  const updateSwitchData = (value: GameType) => {
     setSelectionMode(value);
     onSelectSwitch(value);
   };
@@ -34,10 +35,11 @@ export default function CustomSwitch({
     >
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => updateSwitchData(1)}
+        onPress={() => updateSwitchData(GameType.FREE_TO_PLAY)}
         style={{
           flex: 1,
-          backgroundColor: getSelectionMode === 1 ? '#AD40AF' : '#e4e4e4',
+          backgroundColor:
+            getSelectionMode === GameType.FREE_TO_PLAY ? '#AD40AF' : '#e4e4e4',
           borderRadius: 10,
           justifyContent: 'center',
           alignItems: 'center',
@@ -45,7 +47,8 @@ export default function CustomSwitch({
       >
         <Text
           style={{
-            color: getSelectionMode === 1 ? 'white' : '#AD40AF',
+            color:
+              getSelectionMode === GameType.FREE_TO_PLAY ? 'white' : '#AD40AF',
             fontSize: 14,
             // fontFamily: 'Roboto-Medium',
           }}
@@ -55,10 +58,11 @@ export default function CustomSwitch({
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => updateSwitchData(2)}
+        onPress={() => updateSwitchData(GameType.PAID_GAME)}
         style={{
           flex: 1,
-          backgroundColor: getSelectionMode === 2 ? '#AD40AF' : '#e4e4e4',
+          backgroundColor:
+            getSelectionMode === GameType.PAID_GAME ? '#AD40AF' : '#e4e4e4',
           borderRadius: 10,
           justifyContent: 'center',
           alignItems: 'center',
@@ -66,7 +70,8 @@ export default function CustomSwitch({
       >
         <Text
           style={{
-            color: getSelectionMode === 2 ? 'white' : '#AD40AF',
+            color:
+              getSelectionMode === GameType.PAID_GAME ? 'white' : '#AD40AF',
             fontSize: 14,
             // fontFamily: 'Roboto-Medium',
           }}

@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 // import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Material from 'react-native-vector-icons/MaterialIcons';
-import { SCREEN } from '../const';
+import { SCREEN } from '../interface/enum';
 import { FavouriteScreen, HomeScreenIns, ProfileScreen } from '../screens';
 const RootStack = createStackNavigator();
 

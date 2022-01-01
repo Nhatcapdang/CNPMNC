@@ -15,6 +15,7 @@ import { windowwidth } from '../utils/Dimensions';
 import CustomSwitch from '../components/CustomSwitch';
 import ItemGame from '../components/Item';
 import { freeGames, paidGames, sliderData } from '../const';
+import { GameType } from '../interface/enum';
 // import {  NativeStackScreenProps } from 'react-navigation-stack';
 
 function BannerSlider({ data }: any) {
@@ -36,9 +37,9 @@ interface IProps {
 const HomeScreenGame = ({ navigation }: IProps) => {
   const carouselRef = useRef(null);
   const [index, setIndex] = React.useState(0);
-  const [gamesTab, setGamesTab] = useState(1);
+  const [gamesTab, setGamesTab] = useState(GameType.FREE_TO_PLAY);
 
-  const onSelectSwitch = (value: number) => {
+  const onSelectSwitch = (value: GameType) => {
     setGamesTab(value);
   };
   return (
@@ -55,7 +56,7 @@ const HomeScreenGame = ({ navigation }: IProps) => {
           <Text style={{ fontSize: 18 }}>Hello John Doe</Text>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             {/* <ImageBackground
-              source={require('../assets/images/user-profile.jpg')}
+              source={require('../../assets/gaming.png')}
               style={{ width: 35, height: 35 }}
               imageStyle={{ borderRadius: 25 }}
             /> */}
@@ -135,13 +136,13 @@ const HomeScreenGame = ({ navigation }: IProps) => {
         />
         <View style={{ marginBottom: 20 }}>
           <CustomSwitch
-            selectionMode={1}
+            selectionMode={GameType.FREE_TO_PLAY}
             option1="Free to play"
             option2="Paid games"
             onSelectSwitch={onSelectSwitch}
           />
         </View>
-        {gamesTab === 1 &&
+        {gamesTab === GameType.FREE_TO_PLAY &&
           freeGames.map(item => (
             <ItemGame
               key={item.id}
@@ -152,7 +153,7 @@ const HomeScreenGame = ({ navigation }: IProps) => {
               price={undefined}
             />
           ))}
-        {gamesTab === 2 &&
+        {gamesTab === GameType.PAID_GAME &&
           paidGames.map(item => (
             <ItemGame
               key={item.id}

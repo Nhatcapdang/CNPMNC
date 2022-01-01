@@ -4,10 +4,10 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackScreen } from './src/StackNavigation';
 import { AuthContext, IAuthContext } from './src/common/context';
-import { ILoginState, IUsers } from './src/interface';
+import { IUsers } from './src/interface';
 import { ActionKind } from './src/interface/enum';
 import Spinner from './src/common/spinner';
-import { loginReducer } from './src/reducer';
+import { loginReducer, initialLoginState } from './src/reducer';
 import { StatusBar } from 'react-native';
 import DrawStackGame from './src/DrawerContent/DrawStackGame';
 import Tabs from './src/TabNavigation/AuthTab';
@@ -15,11 +15,6 @@ import { DarkTheme } from './src/common/Theme';
 import DrawStackIns from './src/DrawerContent/DrawStackIns';
 
 function App() {
-  const initialLoginState: ILoginState = {
-    isLoading: true,
-    userName: undefined,
-    userToken: undefined,
-  };
   const [IsDarkTheme, setIsDarkTheme] = useState(false);
   const [isUiGame, setIsUiGame] = useState(false);
 

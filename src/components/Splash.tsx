@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
-  Image,
   SafeAreaView,
+  ImageBackground,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -20,7 +20,6 @@ import {
 import { SCREEN } from '../const';
 import { height } from '../utils/Dimensions';
 import { AuthContext } from '../common/context';
-// import Gaming from '../../assets/gaming.svg';
 
 interface SplashProps {
   navigation?: any;
@@ -60,11 +59,14 @@ const SplashScreen: FC<SplashProps> = ({ navigation }) => {
           <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
-            {/* <Gaming
-            width={300}
-            height={300}
-            style={{ transform: [{ rotate: '-15deg' }] }}
-          /> */}
+            <ImageBackground
+              source={require('../../assets/gaming.png')}
+              style={{ width: 150, height: 150 }}
+              imageStyle={{
+                borderRadius: 25,
+                transform: [{ rotate: '-15deg' }],
+              }}
+            />
           </View>
           <TouchableOpacity
             style={{

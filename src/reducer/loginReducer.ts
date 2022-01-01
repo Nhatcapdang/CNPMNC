@@ -1,7 +1,12 @@
 import { ILoginState } from '../interface';
 import { Action, ActionKind } from '../interface/enum';
 
-const loginReducer = (
+export const initialLoginState: ILoginState = {
+  isLoading: true,
+  userName: undefined,
+  userToken: undefined,
+};
+export const loginReducer = (
   prevState: ILoginState,
   action: Action<Pick<ILoginState, 'userName' | 'userToken'>>,
 ): ILoginState => {
@@ -36,4 +41,3 @@ const loginReducer = (
       };
   }
 };
-export default loginReducer;
