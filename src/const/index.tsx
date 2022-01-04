@@ -146,3 +146,33 @@ export const freeGames = [
     id: '6',
   },
 ];
+
+export const carItemData = [
+  {
+    title: 'Model S',
+    subtitle: 'Starting at $69,420',
+    image:
+      'https://images.unsplash.com/photo-1617138224472-c835247ce42a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80',
+  },
+  {
+    title: 'Model 3',
+    subtitle: 'Order Online for',
+    taglineCTA: 'Touchless Delivery',
+    image:
+      'https://images.unsplash.com/photo-1617138224472-c835247ce42a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80',
+  },
+  {
+    title: 'Model X',
+    subtitle: 'Order Online for',
+    taglineCTA: 'Touchless Delivery',
+    image:
+      'https://images.unsplash.com/photo-1617138224472-c835247ce42a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80',
+  },
+  {
+    title: 'Model Y',
+    subtitle: 'Order Online for',
+    taglineCTA: 'Touchless Delivery',
+    image:
+      'https://images.unsplash.com/photo-1617138224472-c835247ce42a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80',
+  },
+];
